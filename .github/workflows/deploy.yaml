@@ -1,0 +1,17 @@
+name: "Hola mundo"
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy-prueba:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hacemos pull del codigo"
+      - run: echo "Corrre migraciones"
+      - run: echo "Genera binario"
+      - run: echo "Public version"
+
+    
+    
