@@ -21,5 +21,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Hola mundo segundo
-        run: echo "Hola mundo desde mi segundo flujo de git action"
+      - name: working desde dir
+        run: ls -al
+      
+      - name: actions
+        uses: actions/checkout@v4
+
+      - name: working dir 2
+        run: ls -al
+        
+
+     
