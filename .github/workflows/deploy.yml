@@ -12,6 +12,7 @@ jobs:
         run: echo "Hola mundo desde mi primer flujo de git action"
 
   second-job:
+    if: ${{ github.ref == 'refs/heads/main'}}
     needs: first-job
     runs-on: ubuntu-latest
 
