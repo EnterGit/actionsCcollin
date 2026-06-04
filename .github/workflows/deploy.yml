@@ -1,12 +1,19 @@
 name: Deploy to server
 
 on:
-  - push
+  push:
+
 jobs:
-  first-jobs:
+  first-job:
     runs-on: ubuntu-latest
 
     steps:
       - name: Hola mundo
         run: echo "Hola mundo desde mi primer flujo de git action"
-        
+
+  second-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Hola mundo segundo
+        run: echo "Hola mundo desde mi segundo flujo de git action"
