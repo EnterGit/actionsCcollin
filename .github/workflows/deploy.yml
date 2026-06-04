@@ -38,7 +38,7 @@ jobs:
         run: ls -al
 
   third-job:
-    name: Mi Jobs1 prueba
+    name: Mi Jobs3 prueba
     runs-on: ubuntu-latest
 
     steps:
@@ -52,7 +52,7 @@ jobs:
           path: archivo.txt
 
   fourth-job:
-    name: Mi Jobs1 prueba
+    name: Mi Jobs4 prueba
     runs-on: ubuntu-latest
 
     steps:
