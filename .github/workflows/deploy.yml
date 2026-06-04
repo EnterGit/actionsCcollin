@@ -50,3 +50,16 @@ jobs:
         with:
           name: archivo.txt
           path: archivo.txt
+
+  fourth-job:
+    name: Mi Jobs1 prueba
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: bajar artefacto
+        uses: actions/download-artifact@v4
+        with:
+          name: archivo.txt
+
+      - name: Verificar archivo
+        run: cat archivo.txt
