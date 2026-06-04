@@ -15,6 +15,15 @@ jobs:
       - name: Hola mundo
         run: echo "Hola mundo $NAME"
 
+      - name : pasarvalor
+        id: pasarvalor_step1
+        run: echo "my_variable=Hola desde variable" >> $GITHUB_OUTPUT
+  
+      - name : ObtenerMensaje
+        run: echo "mi variable es ${pasarvalor_step1.outputs.my_variable}"
+    
+  
+
   second-job:
     if: ${{ github.ref == 'refs/heads/main'}}
     needs: first-job
@@ -29,6 +38,6 @@ jobs:
 
       - name: working dir 2
         run: ls -al
-        
+
 
      
