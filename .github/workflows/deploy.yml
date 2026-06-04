@@ -5,11 +5,15 @@ on:
 
 jobs:
   first-job:
+    name: Mi Jobs1 prueba
     runs-on: ubuntu-latest
+
+    env: 
+      NAME: Cesar
 
     steps:
       - name: Hola mundo
-        run: echo "Hola mundo desde mi primer flujo de git action"
+        run: echo "Hola mundo $NAME"
 
   second-job:
     if: ${{ github.ref == 'refs/heads/main'}}
