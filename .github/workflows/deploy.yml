@@ -36,3 +36,17 @@ jobs:
 
       - name: working dir 2
         run: ls -al
+
+  third-job:
+    name: Mi Jobs1 prueba
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generacion de Archivo
+        run: "echo 'Hola desde archivo' > archivo.txt"
+
+      - name: subir artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: archivo.txt
+          path: archivo.txt
