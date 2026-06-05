@@ -9,3 +9,21 @@ jobs:
     steps:
       - name: print variable
         run: echo "${{ secrets.TOCKE_SECRECT }}"
+
+      - name: setup
+        uses: actions/checkout@v4
+        with:
+              node-version: 18.x
+
+      - name: install
+        run: npm install
+
+      - name: build
+        run: npm run build
+
+      - name: deploy
+        run: echo "Deploy"
+      
+      
+      
+      
