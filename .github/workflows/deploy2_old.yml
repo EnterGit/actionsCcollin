@@ -1,0 +1,65 @@
+name: Deploy to server
+
+on:
+  push:
+
+jobs:
+  first-job:
+    name: Mi Jobs1 prueba
+    runs-on: ubuntu-latest
+
+    env: 
+      NAME: Cesar
+
+    steps:
+      - name: Hola mundo
+        run: echo "Hola mundo $NAME"
+
+      - name: pasarvalor
+        id: pasarvalor_step1
+        run: echo "my_variable=Hola desde variable" >> $GITHUB_OUTPUT
+  
+      - name: ObtenerMensaje
+        run: echo "mi variable es ${{ steps.pasarvalor_step1.outputs.my_variable }}"
+    
+  second-job:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: first-job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: working desde dir
+        run: ls -al
+      
+      - name: actions
+        uses: actions/checkout@v4
+
+      - name: working dir 2
+        run: ls -al
+
+  third-job:
+    name: Mi Jobs3 prueba
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generacion de Archivo
+        run: "echo 'Hola desde archivo' > archivo.txt"
+
+      - name: subir artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: archivo.txt
+          path: archivo.txt
+
+  fourth-job:
+    name: Mi Jobs4 prueba
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: bajar artefacto
+        uses: actions/download-artifact@v4
+        with:
+          name: archivo.txt
+
+      - name: Verificar archivo
+        run: cat archivo.txt

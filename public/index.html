@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hola Mundo - Premium App</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glass-card">
+        <h1 class="title">¡Hola Mundo!</h1>
+        <p class="subtitle">Bienvenido a tu aplicación estática en Node.js + Express.</p>
+        <div class="badge">Diseño Premium</div>
+        <button class="interactive-btn" onclick="sayHello()">¡Interactuar!</button>
+        <p id="response-msg" class="message"></p>
+    </div>
+    
+    <script>
+        function sayHello() {
+            const btn = document.querySelector('.interactive-btn');
+            btn.classList.add('clicked');
+            setTimeout(() => btn.classList.remove('clicked'), 300);
+            
+            fetch('/api')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('response-msg').innerText = `Servidor: "${data.message}"`;
+                })
+                .catch(err => {
+                    document.getElementById('response-msg').innerText = "Hola desde el navegador (Servidor)";
+                });
+        }
+    </script>
+</body>
+</html>
