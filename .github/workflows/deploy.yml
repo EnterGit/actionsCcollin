@@ -2,6 +2,7 @@ name: Deploy
 
 on:
   push:
+    branches: [main]
 
 jobs:
   first_job:
@@ -9,32 +10,38 @@ jobs:
 
     services:
       redis:
-        image: redis
+        image: redis:7
         ports:
           - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Install Redis CLI
-        run: sudo apt-get update -y && sudo apt-get install redis-tools -y
-
-      - name: Test Redis
-        run: redis-cli -h localhost -p 6379 ping
-
-      - name: Print variable
-        run: echo "${{ secrets.TOCKE_SECRECT }}"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: '18'
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Build application
+      - name: Install Redis CLI
+        run: sudo apt-get update -y && sudo apt-get install -y redis-tools
+
+      - name: Test Redis
+        run: redis-cli -h localhost -p 6379 ping
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build
         run: npm run build
 
       - name: Deploy
