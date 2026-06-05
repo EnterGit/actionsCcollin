@@ -1,6 +1,7 @@
 name: Deploy
 
-on: push
+on:
+  push:
 
 jobs:
   first_job:
@@ -13,22 +14,22 @@ jobs:
           - 6379:6379
 
     steps:
-      - name: print variable
-        run: echo "${{ secrets.TOCKE_SECRECT }}"
-
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
 
       - name: Install Redis CLI
         run: sudo apt-get update -y && sudo apt-get install redis-tools -y
 
       - name: Test Redis
         run: redis-cli -h localhost -p 6379 ping
+
+      - name: Print variable
+        run: echo "${{ secrets.TOCKE_SECRECT }}"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
 
       - name: Install dependencies
         run: npm install
